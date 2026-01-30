@@ -5,33 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ElevatorMart</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #27cfa5;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    font-weight: 500;
+    max-width: 300px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  
+  .favorite {
+    color: #ff4757 !important;
+  }
+  
+  .faq-answer {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 10px;
+    border-left: 3px solid #27cfa5;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-answer.active {
+    max-height: 500px;
+    margin-bottom: 10px;
+  }
+  
+  .faq-answer p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .toggle-btn {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .toggle-btn.active {
+    transform: rotate(45deg);
+  }
+  
+  /* Smooth transitions for discount cards */
+  .d-card {
+    transition: all 0.3s ease;
+  }
+  
+  .product-heart, .wish {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .cart {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .cart:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Active navigation link */
+  .main-nav a.active {
+    color: #27cfa5;
+    font-weight: bold;
+  }
+  
+  .main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #27cfa5;
+  }
+  
+  section {
+    scroll-margin-top: 80px; /* To account for fixed header */
+  }
+</style>
 </head>
 <body>
 <header class="main-header">
   <div class="nav-container">
-    <div class="logo">elevatormart</div>
+    <div class="logo" id="homeLink" style="cursor: pointer;">elevatormart</div>
     <nav class="main-nav">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Category</a>
-      <a href="#">Insights</a>
-      <a href="#">Contact us</a>
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#category" class="nav-link">Category</a>
+      <a href="#insights" class="nav-link">Insights</a>
+      <a href="#contact" class="nav-link">Contact us</a>
     </nav>
     <button class="bulk-enquiry-btn">Bulk Enquiry</button>
   </div>
 </header>
 
-<header class="hero">
+<section id="home" class="hero">
   <div class="hero-content">
     <h1>Precision Parts.<br>Trusted Performance</h1>
     <div class="search">
-      <input type="text" placeholder="Search product...">
-      <button></button>
+      <input type="text" placeholder="Search product..." id="searchInput">
+      <button id="searchBtn">🔍</button>
     </div>
   </div>
-</header>
+</section>
 
-<section class="section categories-section">
+<section id="category" class="section categories-section">
   <h2>Shop by Categories</h2>
   <div class="categories-grid">
     <div class="category-card">
@@ -67,132 +187,72 @@
 
 <section class="section new-arrivals-section">
   <h2>New Arrivals</h2>
-  <div class="new-arrivals-grid">
-    <!-- Product 1 -->
-    <div class="new-arrival-card">
-      <div class="product-badge">20%</div>
-      <div class="product-heart">❤</div>
-      <div class="product-image">
-        <img src="image5.jpeg" alt="Elevator Controller">
-      </div>
-      <div class="arrival-category">Elevator Controllers</div>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="product-rating">
-        <span class="stars">⭐⭐⭐⭐⭐</span>
-        <span class="rating-count">(4.8)</span>
-      </div>
-      <div class="arrival-price">
-        <span class="old-price">AED 1,999</span>
-        <span class="new-price">AED 1,446</span>
-      </div>
-    </div>
-    
-    <!-- Product 2 -->
-    <div class="new-arrival-card">
-      <div class="product-badge">15%</div>
-      <div class="product-heart">❤</div>
-      <div class="product-image">
-        <img src="k1.jpeg" alt="Elevator Controller">
-      </div>
-      <div class="arrival-category">Elevator Controllers</div>
-      <h4>Elevator Control Panel</h4>
-      <div class="product-rating">
-        <span class="stars">⭐⭐⭐⭐⭐</span>
-        <span class="rating-count">(4.9)</span>
-      </div>
-      <div class="arrival-price">
-        <span class="old-price">AED 2,199</span>
-        <span class="new-price">AED 1,869</span>
-      </div>
-    </div>
-    
-    <!-- Product 3 -->
-    <div class="new-arrival-card">
-      <div class="product-badge">25%</div>
-      <div class="product-heart">❤</div>
-      <div class="product-image">
-        <img src="image5.jpeg" alt="Elevator Wheel">
-      </div>
-      <div class="arrival-category">Elevator Parts</div>
-      <h4>Traction Wheel Assembly</h4>
-      <div class="product-rating">
-        <span class="stars">⭐⭐⭐⭐☆</span>
-        <span class="rating-count">(4.5)</span>
-      </div>
-      <div class="arrival-price">
-        <span class="old-price">AED 1,850</span>
-        <span class="new-price">AED 1,387</span>
-      </div>
-    </div>
-    
-    <!-- Product 4 -->
-    <div class="new-arrival-card">
-      <div class="product-badge">10%</div>
-      <div class="product-heart">❤</div>
-      <div class="product-image">
-        <img src="image2.jpeg" alt="Elevator Motor">
-      </div>
-      <div class="arrival-category">Elevator Motors</div>
-      <h4>High-Speed Traction Motor</h4>
-      <div class="product-rating">
-        <span class="stars">⭐⭐⭐⭐⭐</span>
-        <span class="rating-count">(4.7)</span>
-      </div>
-      <div class="arrival-price">
-        <span class="old-price">AED 3,499</span>
-        <span class="new-price">AED 3,149</span>
-      </div>
-    </div>
-    
-    <!-- Product 5 -->
-    <div class="new-arrival-card">
-      <div class="product-badge">30%</div>
-      <div class="product-heart">❤</div>
-      <div class="product-image">
-        <img src="image1.webp" alt="Control Board">
-      </div>
-      <div class="arrival-category">Control Systems</div>
-      <h4>PCB Control Board</h4>
-      <div class="product-rating">
-        <span class="stars">⭐⭐⭐⭐☆</span>
-        <span class="rating-count">(4.6)</span>
-      </div>
-      <div class="arrival-price">
-        <span class="old-price">AED 2,500</span>
-        <span class="new-price">AED 1,750</span>
-      </div>
-    </div>
+  <div class="new-arrivals-grid" id="newArrivalsGrid">
+    <!-- Products will be loaded by JavaScript -->
   </div>
 </section>
+
 <section class="top-discount">
   <div class="discount-left">
     <h3>Top-Discount</h3>
     <h2>Elevator Spare Parts</h2>
     <div class="nav-btn">
-      <button>‹</button>
-      <button>›</button>
+      <button id="prevDiscount">‹</button>
+      <button id="nextDiscount">›</button>
     </div>
   </div>
   
   <div class="discount-products">
+    <!-- Product 1 -->
     <div class="d-card">
-      <span class="tag">AED 40</span>
-      <h4>Latest & Unique<br>Products</h4>
-      <img src="img2.jpeg" alt="Product">
+      <span class="tag">-30%</span>
+      <h4>Elevator Traction<br>Motor</h4>
+      <img src="image2.jpeg" alt="Elevator Traction Motor">
+      <div class="d-price">
+        <span class="d-old-price">AED 2,500</span>
+        <span class="d-new-price">AED 1,750</span>
+      </div>
       <a href="#">→</a>
     </div>
+    
     <div class="d-card">
-      <span class="tag">AED 40</span>
-      <h4>Latest & Unique<br>Products</h4>
-      <img src="image4.jpeg" alt="Product">
+      <span class="tag">-25%</span>
+      <h4>Control Panel<br>Board</h4>
+      <img src="image5.jpeg" alt="Control Panel Board">
+      <div class="d-price">
+        <span class="d-old-price">AED 1,800</span>
+        <span class="d-new-price">AED 1,350</span>
+      </div>
+      <a href="#">→</a>
+    </div>
+    
+    <div class="d-card">
+      <span class="tag">-40%</span>
+      <h4>Door Operator<br>System</h4>
+      <img src="image4.jpeg" alt="Door Operator System">
+      <div class="d-price">
+        <span class="d-old-price">AED 3,200</span>
+        <span class="d-new-price">AED 1,920</span>
+      </div>
+      <a href="#">→</a>
+    </div>
+    
+    <div class="d-card">
+      <span class="tag">-15%</span>
+      <h4>Safety Brake<br>Assembly</h4>
+      <img src="k1.jpeg" alt="Safety Brake Assembly">
+      <div class="d-price">
+        <span class="d-old-price">AED 1,200</span>
+        <span class="d-new-price">AED 1,020</span>
+      </div>
       <a href="#">→</a>
     </div>
   </div>
 </section>
 
-<section class="featured section">
+<section id="about" class="featured section">
   <div class="featured-head">
-    <h2>Featured products</h2>
+    <h2>About Our Featured Products</h2>
   </div>
   <div class="featured-grid">
     <div class="featured-product">
@@ -241,86 +301,22 @@
 <section class="our-products section">
   <div class="op-head">
     <h2>Our Products</h2>
-    <button class="view-all">View All</button>
+    <button class="view-all" id="viewAllProducts">View All</button>
   </div>
-  <div class="op-grid">
-    <div class="op-card">
-      <span class="badge">-20%</span>
-      <span class="wish">♡</span>
-      <img src="image5.jpeg" alt="Elevator Traction Wheel">
-      <small>Elevator Controllers</small>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="stars">★★★★★</div>
-      <div class="price">
-        <del>AED 1,999</del>
-        <strong>AED 1,446</strong>
-      </div>
-      <span class="cart">🛒</span>
-    </div>
-    <div class="op-card">
-      <span class="badge">-20%</span>
-      <span class="wish">♡</span>
-      <img src="image2.jpeg" alt="Elevator Traction Wheel">
-      <small>Elevator Controllers</small>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="stars">★★★★★</div>
-      <div class="price">
-        <del>AED 1,999</del>
-        <strong>AED 1,446</strong>
-      </div>
-      <span class="cart">🛒</span>
-    </div>
-    <div class="op-card">
-      <span class="badge">-20%</span>
-      <span class="wish">♡</span>
-      <img src="image5.jpeg" alt="Elevator Traction Wheel">
-      <small>Elevator Controllers</small>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="stars">★★★★★</div>
-      <div class="price">
-        <del>AED 1,999</del>
-        <strong>AED 1,446</strong>
-      </div>
-      <span class="cart">🛒</span>
-    </div>
-    <div class="op-card">
-      <span class="badge">-20%</span>
-      <span class="wish">♡</span>
-      <img src="k1.jpeg" alt="Elevator Traction Wheel">
-      <small>Elevator Controllers</small>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="stars">★★★★★</div>
-      <div class="price">
-        <del>AED 1,999</del>
-        <strong>AED 1,446</strong>
-      </div>
-      <span class="cart">🛒</span>
-    </div>
-    <div class="op-card">
-      <span class="badge">-20%</span>
-      <span class="wish">♡</span>
-      <img src="f7.jpeg" alt="Elevator Traction Wheel">
-      <small>Elevator Controllers</small>
-      <h4>Elevator Traction Wheel</h4>
-      <div class="stars">★★★★★</div>
-      <div class="price">
-        <del>AED 1,999</del>
-        <strong>AED 1,446</strong>
-      </div>
-      <span class="cart">🛒</span>
-    </div>
+  <div class="op-grid" id="productsGrid">
+    <!-- Products will be loaded by JavaScript -->
   </div>
 </section>
 
-<section class="faq-wrap">
+<section id="insights" class="faq-wrap">
   <div class="faq-left">
-    <h2>Frequently Asked<br>Questions</h2>
+    <h2>Insights &<br>Frequently Asked<br>Questions</h2>
     <a href="#" class="view-all-faq">View All FAQ</a>
   </div>
   <div class="faq-right">
     <div class="faq-main">
       <h3>Are your spare parts compatible with all elevator brands?</h3>
-      <p class="faq-desc">We offer a wide range of elevator spare parts, including motors, buttons, control panels, door systems, guide rails, and safety components. Whether you're looking for mechanical, electrical, or electronic parts, we have you covered. Whether you're looking for mechanical, electrical, or electronic parts, we have you...</p>
+      <p class="faq-desc">We offer a wide range of elevator spare parts, including motors, buttons, control panels, door systems, guide rails, and safety components. Whether you're looking for mechanical, electrical, or electronic parts, we have you covered.</p>
       <a href="#" class="show-more">[Show More]</a>
     </div>
     
@@ -332,6 +328,9 @@
           <span>How can I determine which part is suitable for my elevator?</span>
           <button class="toggle-btn">+</button>
         </div>
+        <div class="faq-answer">
+          <p>You can determine the suitable part by checking the elevator model number, manufacturer specifications, or consulting with our technical team who can guide you based on your requirements.</p>
+        </div>
       </div>
       
       <div class="faq-item">
@@ -339,19 +338,28 @@
           <span>Do you offer original or aftermarket parts?</span>
           <button class="toggle-btn">+</button>
         </div>
-      </div>
-      
-      <div class="faq-item">
-        <div class="faq-question">
-          <span>Are your spare parts compatible with all elevator brands?</span>
-          <button class="toggle-btn">+</button>
+        <div class="faq-answer">
+          <p>We offer both original equipment manufacturer (OEM) parts and high-quality aftermarket parts. All our parts come with warranties and meet industry standards.</p>
         </div>
       </div>
       
       <div class="faq-item">
         <div class="faq-question">
-          <span>Are your spare parts compatible with all elevator brands?</span>
+          <span>What is your delivery time?</span>
           <button class="toggle-btn">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>Delivery time varies based on location and product availability. Typically, we deliver within 3-7 business days for GCC countries and 7-14 days for international orders.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Do you provide installation services?</span>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we offer installation services through our network of certified technicians across various regions. Installation charges may vary based on the complexity of the job.</p>
         </div>
       </div>
     </div>
@@ -362,45 +370,24 @@
   <div class="test-head">
     <h2>Customer Testimonial</h2>
     <div class="arrows">
-      <span>‹</span>
-      <span>›</span>
+      <span id="prevTestimonial">‹</span>
+      <span id="nextTestimonial">›</span>
     </div>
   </div>
-  <div class="test-grid">
-    <div class="test-card">
-      <p>OHHHH Thanks god !!!! Finally, I got my product and it was very amazing. Thank you Elevator mart...</p>
-      <div class="stars">★★★★☆</div>
-      <div class="user">
-        <div class="user-info">
-          <strong>Jane Copper</strong>
-          <small>Lead designer</small>
-        </div>
-      </div>
-    </div>
-    <div class="test-card">
-      <p>OHHHH Thanks god !!!! Finally, I got my product and it was very amazing. Thank you Elevator mart...</p>
-      <div class="stars">★★★★☆</div>
-      <div class="user">
-        <div class="user-info">
-          <strong>Jane Copper</strong>
-          <small>Lead designer</small>
-        </div>
-      </div>
-    </div>
+  <div class="test-grid" id="testimonialGrid">
+    <!-- Testimonials will be loaded by JavaScript -->
   </div>
 </section>
 
-
-<section class="enquiry">
-  <h2>Enquire Now for Top-Quality<br>Elevator Spare Parts</h2>
-  <button>Enquire now</button>
+<section id="contact" class="enquiry">
+  <h2>Contact Us for Top-Quality<br>Elevator Spare Parts</h2>
+  <button id="enquiryBtn" onclick="window.location.href='enquiry.html'">Enquire now</button>
 </section>
-
 
 <footer class="footer">
   <div class="footer-top">
     <div class="footer-col brand">
-      <img src="images/logo.svg" class="logo" alt="elevatormart">
+      <div class="logo">elevatormart</div>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       <p class="contact">info@elevatormart.com<br>+971 5896 6245</p>
       <div class="socials">
@@ -411,11 +398,11 @@
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Products</a>
-      <a href="#">Insights</a>
-      <a href="#">Contact us</a>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#category">Products</a>
+      <a href="#insights">Insights</a>
+      <a href="#contact">Contact us</a>
     </div>
     <div class="footer-col">
       <h4>Customer</h4>
@@ -439,6 +426,597 @@
     </div>
   </div>
 </footer>
+<script>
+// Product Data - In a real app, this would come from an API
+const newArrivalsData = [
+  {
+    id: 1,
+    badge: "20%",
+    image: "image5.jpeg",
+    category: "Elevator Controllers",
+    title: "Elevator Traction Wheel",
+    rating: 4.8,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  },
+  {
+    id: 2,
+    badge: "15%",
+    image: "k1.jpeg",
+    category: "Elevator Controllers",
+    title: "Elevator Control Panel",
+    rating: 4.9,
+    oldPrice: "AED 2,199",
+    newPrice: "AED 1,869",
+    isFavorite: false
+  },
+  {
+    id: 3,
+    badge: "25%",
+    image: "image5.jpeg",
+    category: "Elevator Parts",
+    title: "Traction Wheel Assembly",
+    rating: 4.5,
+    oldPrice: "AED 1,850",
+    newPrice: "AED 1,387",
+    isFavorite: false
+  },
+  {
+    id: 4,
+    badge: "10%",
+    image: "image2.jpeg",
+    category: "Elevator Motors",
+    title: "High-Speed Traction Motor",
+    rating: 4.7,
+    oldPrice: "AED 3,499",
+    newPrice: "AED 3,149",
+    isFavorite: false
+  },
+  {
+    id: 5,
+    badge: "30%",
+    image: "image1.webp",
+    category: "Control Systems",
+    title: "PCB Control Board",
+    rating: 4.6,
+    oldPrice: "AED 2,500",
+    newPrice: "AED 1,750",
+    isFavorite: false
+  }
+];
+
+const productsData = [
+  {
+    id: 1,
+    badge: "-20%",
+    image: "image5.jpeg",
+    category: "Elevator Controllers",
+    title: "Elevator Traction Wheel",
+    rating: 5,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  },
+  {
+    id: 2,
+    badge: "-20%",
+    image: "image2.jpeg",
+    category: "Elevator Controllers",
+    title: "Elevator Control System",
+    rating: 5,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  },
+  {
+    id: 3,
+    badge: "-20%",
+    image: "image5.jpeg",
+    category: "Elevator Controllers",
+    title: "Traction Motor Assembly",
+    rating: 5,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  },
+  {
+    id: 4,
+    badge: "-20%",
+    image: "k1.jpeg",
+    category: "Elevator Controllers",
+    title: "Control Panel Board",
+    rating: 5,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  },
+  {
+    id: 5,
+    badge: "-20%",
+    image: "f7.jpeg",
+    category: "Elevator Controllers",
+    title: "Door Operator System",
+    rating: 5,
+    oldPrice: "AED 1,999",
+    newPrice: "AED 1,446",
+    isFavorite: false
+  }
+];
+
+const testimonialsData = [
+  {
+    id: 1,
+    text: "OHHHH Thanks god !!!! Finally, I got my product and it was very amazing. Thank you Elevator mart for the excellent service and quality products.",
+    rating: 4,
+    name: "Jane Copper",
+    position: "Lead Designer"
+  },
+  {
+    id: 2,
+    text: "Excellent quality parts and timely delivery. The technical support team was very helpful in guiding us through the installation process. Highly recommended!",
+    rating: 5,
+    name: "John Smith",
+    position: "Maintenance Manager"
+  },
+  {
+    id: 3,
+    text: "Great experience shopping with ElevatorMart. Their products are genuine and the pricing is competitive. Will definitely order again!",
+    rating: 4,
+    name: "Sarah Johnson",
+    position: "Project Engineer"
+  }
+];
+
+function generateStars(rating) {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  let stars = '';
+  
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStars) {
+      stars += '★';
+    } else if (i === fullStars && hasHalfStar) {
+      stars += '½';
+    } else {
+      stars += '☆';
+    }
+  }
+  return stars;
+}
+
+const newArrivalsGrid = document.getElementById('newArrivalsGrid');
+const productsGrid = document.getElementById('productsGrid');
+const testimonialGrid = document.getElementById('testimonialGrid');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const enquiryBtn = document.getElementById('enquiryBtn');
+const viewAllProductsBtn = document.getElementById('viewAllProducts');
+const prevDiscountBtn = document.getElementById('prevDiscount');
+const nextDiscountBtn = document.getElementById('nextDiscount');
+const prevTestimonialBtn = document.getElementById('prevTestimonial');
+const nextTestimonialBtn = document.getElementById('nextTestimonial');
+const faqQuestions = document.querySelectorAll('.faq-question');
+const navLinks = document.querySelectorAll('.nav-link');
+const homeLogo = document.getElementById('homeLink');
+const bulkEnquiryBtn = document.querySelector('.bulk-enquiry-btn');
+
+function smoothScrollTo(target) {
+  const targetElement = document.querySelector(target);
+  if (targetElement) {
+    const headerHeight = document.querySelector('.main-header').offsetHeight;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+}
+
+function updateActiveNavLink() {
+  const scrollPosition = window.scrollY + 100; // Add offset for better detection
+  
+  const sections = document.querySelectorAll('section[id]');
+  
+  let currentSectionId = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+    
+    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+      currentSectionId = section.id;
+    }
+  });
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${currentSectionId}`) {
+      link.classList.add('active');
+    }
+  });
+  
+  if (scrollPosition < 200) {
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#home') {
+        link.classList.add('active');
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderNewArrivals();
+  
+  renderProducts();
+  
+  renderTestimonials();
+  
+  initFAQ();
+  
+  setupEventListeners();
+  
+  setTimeout(() => {
+    showNotification('Welcome to ElevatorMart! Explore our premium elevator parts.');
+  }, 1000);
+  
+  updateActiveNavLink();
+});
+
+function renderNewArrivals() {
+  newArrivalsGrid.innerHTML = '';
+  
+  newArrivalsData.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.className = 'new-arrival-card';
+    productCard.dataset.id = product.id;
+    
+    const starsHTML = generateStars(product.rating);
+    
+    productCard.innerHTML = `
+      <div class="product-badge">${product.badge}</div>
+      <div class="product-heart ${product.isFavorite ? 'favorite' : ''}" data-id="${product.id}">${product.isFavorite ? '❤' : '♡'}</div>
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.title}" loading="lazy">
+      </div>
+      <div class="arrival-category">${product.category}</div>
+      <h4>${product.title}</h4>
+      <div class="product-rating">
+        <span class="stars">${starsHTML}</span>
+        <span class="rating-count">(${product.rating})</span>
+      </div>
+      <div class="arrival-price">
+        <span class="old-price">${product.oldPrice}</span>
+        <span class="new-price">${product.newPrice}</span>
+      </div>
+    `;
+    
+    newArrivalsGrid.appendChild(productCard);
+  });
+  
+  document.querySelectorAll('.new-arrival-card .product-heart').forEach(heart => {
+    heart.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const productId = parseInt(this.dataset.id);
+      const product = newArrivalsData.find(p => p.id === productId);
+      
+      if (product) {
+        product.isFavorite = !product.isFavorite;
+        this.textContent = product.isFavorite ? '❤' : '♡';
+        this.classList.toggle('favorite', product.isFavorite);
+        
+        showNotification(`${product.title} ${product.isFavorite ? 'added to' : 'removed from'} wishlist`);
+      }
+    });
+  });
+}
+
+// Render Products
+function renderProducts() {
+  productsGrid.innerHTML = '';
+  
+  productsData.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.className = 'op-card';
+    productCard.dataset.id = product.id;
+    
+    const starsHTML = generateStars(product.rating);
+    
+    productCard.innerHTML = `
+      <span class="badge">${product.badge}</span>
+      <span class="wish ${product.isFavorite ? 'favorite' : ''}" data-id="${product.id}">${product.isFavorite ? '❤' : '♡'}</span>
+      <img src="${product.image}" alt="${product.title}" loading="lazy">
+      <small>${product.category}</small>
+      <h4>${product.title}</h4>
+      <div class="stars">${starsHTML}</div>
+      <div class="price">
+        <del>${product.oldPrice}</del>
+        <strong>${product.newPrice}</strong>
+      </div>
+      <span class="cart" data-id="${product.id}">🛒</span>
+    `;
+    
+    productsGrid.appendChild(productCard);
+  });
+  
+  // Add event listeners for product interactions
+  document.querySelectorAll('.op-card .wish').forEach(wish => {
+    wish.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const productId = parseInt(this.dataset.id);
+      const product = productsData.find(p => p.id === productId);
+      
+      if (product) {
+        product.isFavorite = !product.isFavorite;
+        this.textContent = product.isFavorite ? '❤' : '♡';
+        this.classList.toggle('favorite', product.isFavorite);
+        
+        showNotification(`${product.title} ${product.isFavorite ? 'added to' : 'removed from'} wishlist`);
+      }
+    });
+  });
+  
+  document.querySelectorAll('.op-card .cart').forEach(cart => {
+    cart.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const productId = parseInt(this.dataset.id);
+      const product = productsData.find(p => p.id === productId);
+      
+      if (product) {
+        showNotification(`${product.title} added to cart!`);
+        
+        this.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 300);
+      }
+    });
+  });
+}
+
+function renderTestimonials() {
+  testimonialGrid.innerHTML = '';
+  
+  testimonialsData.forEach(testimonial => {
+    const testimonialCard = document.createElement('div');
+    testimonialCard.className = 'test-card';
+    testimonialCard.dataset.id = testimonial.id;
+    
+    const starsHTML = generateStars(testimonial.rating);
+    
+    testimonialCard.innerHTML = `
+      <p>${testimonial.text}</p>
+      <div class="stars">${starsHTML}</div>
+      <div class="user">
+        <div class="user-info">
+          <strong>${testimonial.name}</strong>
+          <small>${testimonial.position}</small>
+        </div>
+      </div>
+    `;
+    
+    testimonialGrid.appendChild(testimonialCard);
+  });
+}
+
+function initFAQ() {
+  faqQuestions.forEach(question => {
+    const answer = question.nextElementSibling;
+    const toggleBtn = question.querySelector('.toggle-btn');
+    
+    if (answer && answer.classList.contains('faq-answer')) {
+      answer.style.display = 'none';
+    }
+    
+    question.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const toggleBtn = this.querySelector('.toggle-btn');
+      
+      if (answer && answer.classList.contains('faq-answer')) {
+        if (answer.style.display === 'none' || answer.style.display === '') {
+          answer.style.display = 'block';
+          toggleBtn.textContent = '−';
+          toggleBtn.classList.add('active');
+        } else {
+          answer.style.display = 'none';
+          toggleBtn.textContent = '+';
+          toggleBtn.classList.remove('active');
+        }
+      }
+    });
+  });
+}
+
+// Setup event listeners
+function setupEventListeners() {
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      
+      navLinks.forEach(l => l.classList.remove('active'));
+      
+      this.classList.add('active');
+      
+      smoothScrollTo(targetId);
+      
+      const sectionName = this.textContent;
+      showNotification(`Navigating to ${sectionName} section`);
+    });
+  });
+  
+  homeLogo.addEventListener('click', function() {
+    smoothScrollTo('#home');
+    navLinks.forEach(l => l.classList.remove('active'));
+    document.querySelector('a[href="#home"]').classList.add('active');
+    showNotification('Returning to Home');
+  });
+  
+  document.querySelectorAll('.footer-col a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      smoothScrollTo(targetId);
+      
+      // Update active nav link
+      navLinks.forEach(l => l.classList.remove('active'));
+      document.querySelector(`.nav-link[href="${targetId}"]`)?.classList.add('active');
+    });
+  });
+  
+  searchBtn.addEventListener('click', handleSearch);
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  });
+  
+  // Enquiry button - navigate to enquiry page
+  enquiryBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Navigate to enquiry page
+    window.location.href = 'enquiry.html';
+  });
+  
+  viewAllProductsBtn.addEventListener('click', function() {
+    showNotification('Loading all products...');
+    setTimeout(() => {
+      showNotification('All products loaded successfully!');
+    }, 1000);
+  });
+  
+  let currentDiscountIndex = 0;
+  const discountCards = document.querySelectorAll('.d-card');
+  
+  prevDiscountBtn.addEventListener('click', function() {
+    currentDiscountIndex = (currentDiscountIndex - 1 + discountCards.length) % discountCards.length;
+    updateDiscountDisplay();
+  });
+  
+  nextDiscountBtn.addEventListener('click', function() {
+    currentDiscountIndex = (currentDiscountIndex + 1) % discountCards.length;
+    updateDiscountDisplay();
+  });
+  
+  let currentTestimonialIndex = 0;
+  
+  prevTestimonialBtn.addEventListener('click', function() {
+    currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonialsData.length) % testimonialsData.length;
+    updateTestimonialDisplay();
+  });
+  
+  nextTestimonialBtn.addEventListener('click', function() {
+    currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonialsData.length;
+    updateTestimonialDisplay();
+  });
+  
+  document.querySelectorAll('.new-arrival-card, .op-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-5px)';
+      this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+      this.style.boxShadow = '';
+    });
+  });
+  
+  bulkEnquiryBtn.addEventListener('click', function() {
+    window.location.href = 'enquiry.html';
+  });
+  
+  // Scroll event for updating active nav link
+  window.addEventListener('scroll', updateActiveNavLink);
+}
+
+function handleSearch() {
+  const searchTerm = searchInput.value.trim();
+  
+  if (searchTerm) {
+    showNotification(`Searching for: "${searchTerm}"`);
+    const filteredProducts = [...newArrivalsData, ...productsData].filter(product => 
+      product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    if (filteredProducts.length > 0) {
+      showNotification(`Found ${filteredProducts.length} products matching "${searchTerm}"`);
+    } else {
+      showNotification(`No products found for "${searchTerm}"`);
+    }
+    
+    searchInput.value = '';
+  } else {
+    showNotification('Please enter a search term');
+  }
+}
+
+function updateDiscountDisplay() {
+  const discountCards = document.querySelectorAll('.d-card');
+  discountCards.forEach((card, index) => {
+    if (index === currentDiscountIndex) {
+      card.style.opacity = '1';
+      card.style.transform = 'scale(1.05)';
+      card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+    } else {
+      card.style.opacity = '0.7';
+      card.style.transform = 'scale(0.95)';
+      card.style.boxShadow = 'none';
+    }
+  });
+}
+
+// Update testimonial display
+function updateTestimonialDisplay() {
+  testimonialGrid.innerHTML = '';
+  
+  const testimonial = testimonialsData[currentTestimonialIndex];
+  const starsHTML = generateStars(testimonial.rating);
+  
+  const testimonialCard = document.createElement('div');
+  testimonialCard.className = 'test-card active';
+  testimonialCard.innerHTML = `
+    <p>${testimonial.text}</p>
+    <div class="stars">${starsHTML}</div>
+    <div class="user">
+      <div class="user-info">
+        <strong>${testimonial.name}</strong>
+        <small>${testimonial.position}</small>
+      </div>
+    </div>
+  `;
+  
+  testimonialGrid.appendChild(testimonialCard);
+}
+
+function showNotification(message) {
+  const existingNotification = document.querySelector('.notification');
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+  
+  
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+    setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease';
+    
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 3000);
+}
+
+updateDiscountDisplay();
+</script>
 
 </body>
 </html>
