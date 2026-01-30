@@ -172,6 +172,7 @@ h2 {
   color: #333;
   font-weight: 500;
 }
+
 .new-arrivals-section {
   padding: 40px 80px;
   background: white;
@@ -978,4 +979,341 @@ h2 {
   background: #27cfa5;
   color: white;
   border-color: #27cfa5;
+}
+
+.discount-products-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.discount-products {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s ease;
+  width: max-content;
+}
+
+.discount-products .d-card {
+  flex: 0 0 calc(50% - 10px); /* Show 2 cards at a time */
+  min-width: 300px;
+}
+
+/* Carousel indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.indicator.active {
+  background: #27cfa5;
+}
+
+.nav-btn button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.nav-btn button:active {
+  transform: scale(0.95);
+}
+
+.d-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.d-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.d-card h4 small {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+  display: block;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.view-details {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: #27cfa5;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 50%;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.view-details:hover {
+  background: #20b893;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.discount-products {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (max-width: 992px) {
+  .discount-products .d-card {
+    flex: 0 0 calc(100% - 10px); /* Show 1 card on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .top-discount {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .discount-left {
+    text-align: center;
+  }
+  
+  .nav-btn {
+    justify-content: center;
+  }
+  
+  .discount-products .d-card {
+    min-width: 280px;
+  }
+  
+  .nav-btn button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+}
+
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #27cfa5;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10000;
+  animation: slideIn 0.3s ease;
+  font-weight: 500;
+  max-width: 300px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.faq-answer {
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-left: 3px solid #27cfa5;
+  display: none;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.toggle-btn {
+  transition: transform 0.3s ease;
+}
+
+.favorite {
+  color: #ff4757 !important;
+}
+
+.d-card {
+  transition: all 0.3s ease;
+}
+
+#searchBtn {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.product-heart,
+.wish,
+.cart {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-heart:hover,
+.wish:hover,
+.cart:hover {
+  transform: scale(1.1);
+}
+
+.new-arrival-card,
+.op-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+}
+
+.bulk-enquiry-btn:active,
+.view-all:active,
+.enquiry button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    text-align: center;
+  }
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #27cfa5;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10000;
+  animation: slideIn 0.3s ease;
+  font-weight: 500;
+  max-width: 300px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.faq-answer {
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-left: 3px solid #27cfa5;
+  display: none;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.toggle-btn {
+  transition: transform 0.3s ease;
+}
+
+.favorite {
+  color: #ff4757 !important;
+}
+
+.d-card {
+  transition: all 0.3s ease;
+}
+
+#searchBtn {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.product-heart,
+.wish,
+.cart {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-heart:hover,
+.wish:hover,
+.cart:hover {
+  transform: scale(1.1);
+}
+
+.new-arrival-card,
+.op-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+}
+
+.bulk-enquiry-btn:active,
+.view-all:active,
+.enquiry button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    text-align: center;
+  }
 }
